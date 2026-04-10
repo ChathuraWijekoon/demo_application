@@ -1,5 +1,6 @@
 import 'package:demo_application/components/button.dart';
 import 'package:demo_application/components/squretile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:demo_application/components/textfield.dart';
 
@@ -7,11 +8,16 @@ class LoginPage extends StatefulWidget {
   LoginPage({super.key});
 
   // text editing controllers
-  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   // sign user in method
-  void signUserIn() {}
+  void signUserIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+  }
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -42,10 +48,10 @@ class _LoginPageState extends State<LoginPage> {
 
               const SizedBox(height: 25),
 
-              // username textfield
+              // email textfield
               Textfield(
-                controller: widget.usernameController,
-                hintText: 'Username',
+                controller: widget.emailController,
+                hintText: 'Email',
                 obscureText: false,
               ),
 
