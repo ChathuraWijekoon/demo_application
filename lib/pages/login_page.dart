@@ -1,5 +1,6 @@
 import 'package:demo_application/components/button.dart';
 import 'package:demo_application/components/squretile.dart';
+import 'package:demo_application/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:demo_application/components/textfield.dart';
@@ -104,9 +105,12 @@ class _LoginPageState extends State<LoginPage> {
                 // google + apple sign in buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     // google button
-                    SqureTile(imagePath: 'lib/images/google.png'),
+                    SqureTile(
+                      onTap: () => AuthService().signInWithGoogle(),
+                      imagePath: 'lib/images/google.png',
+                    ),
 
                     SizedBox(width: 10),
 
